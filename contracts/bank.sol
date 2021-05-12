@@ -72,7 +72,7 @@ contract Bank is Ownable {
         balances[msg.sender] -= _amount;
         balances[_to] += _amount; // transferring only to _to's bank balance not to wallet
 
-        logging.record(msg.sender, _to, _amount); // this not working
+        logging.record(msg.sender, _to, _amount);
 
         emit transferred(msg.sender, _to, _amount);
         return balances[msg.sender];
