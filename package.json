@@ -1,0 +1,19 @@
+{
+  "name": "bank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bank.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node bank.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "web3": "^1.3.5"
+  }
+}
