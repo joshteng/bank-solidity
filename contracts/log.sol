@@ -2,7 +2,7 @@
 
 pragma solidity ^0.7.4;
 
-contract Log {
+contract Logger {
     struct Transaction {
         address from;
         address to;

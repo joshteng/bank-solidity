@@ -2,8 +2,9 @@ if (process.env.NODE_ENV !== "production") {
   require('dotenv').config()
 }
 
-const Web3 = require("web3");
-const web3 = new Web3(process.env.RPC_URL);
+const util = require('util')
+const Web3 = require("web3")
+const web3 = new Web3(process.env.RPC_URL)
 const bankAbi = require('./build/contracts/Bank.json').abi
 const logAbi = require('./build/contracts/Log.json').abi
 
@@ -18,6 +19,7 @@ async function main() {
   const myWalletAddress3 = ganacheAccounts[2];
 
   const bankContract = new web3.eth.Contract(bankAbi, bankContractAddress)
+  const logContract = new web3.eth.Contract(logAbi, logContractAddress)
 
   await bankContract.methods.setLogInterface(logContractAddress).send({
     from: myWalletAddress1
@@ -47,7 +49,8 @@ async function main() {
 
   const amountToSend = new BN(web3.utils.toWei("1"))
   await bankContract.methods.transfer(myWalletAddress3, amountToSend).send({
-    from: myWalletAddress1
+    from: myWalletAddress1,
+    gasLimit: 130000
   })
 
   console.log(`Sent ${amountToSend} from ${myWalletAddress1} to ${myWalletAddress3}`)
@@ -59,9 +62,9 @@ async function main() {
     from: myWalletAddress1
   })}`)
 
-  const logContract = new web3.eth.Contract(logAbi, logContractAddress)
+  const res = await logContract.methods.getRecord(0).call()
 
-  console.log(`1st transaction log details: ${await logContract.methods.getRecord(0).call()}`)
+  console.log(`1st transaction log details: ${util.inspect(res, false, null, true)}`)
 }
 
 main()
