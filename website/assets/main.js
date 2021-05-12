@@ -298,7 +298,7 @@ window.addEventListener('load', async () => {
   if (window.ethereum) {
     window.web3 = new Web3(ethereum);
     try {
-      await ethereum.enable();
+      await ethereum.sendAsync('eth_requestAccounts');
     } catch (error) {
       // User denied account access...
     }
