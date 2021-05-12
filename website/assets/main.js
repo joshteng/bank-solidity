@@ -306,8 +306,6 @@ async function deposit(amount) {
 
   const account = window.ethereum.selectedAddress
 
-  console.log(account)
-
   amount = new window.web3.utils.BN(web3.utils.toWei(amount.toString()))
   console.log(await bankContract.methods.deposit().send({
     from: account,
@@ -315,27 +313,11 @@ async function deposit(amount) {
   }))
 }
 
-async function transfer(address, amount) {
-  const bankContract = new window.web3.eth.Contract(bankAbi, "0x89670662006E21bcBe5e926e1f5D6917c2225356")
-
-  const account = window.ethereum.selectedAddress
-
-  console.log(account)
-
-  amount = new window.web3.utils.BN(amount.toString())
-  console.log(await bankContract.methods.transfer(address, amount).send({
-    from: account
-  }))
-}
-
-
 
 async function send(address, amount) {
   const bankContract = new window.web3.eth.Contract(bankAbi, "0x89670662006E21bcBe5e926e1f5D6917c2225356")
 
   const account = window.ethereum.selectedAddress
-
-  console.log(account)
 
   amount = new window.web3.utils.BN(web3.utils.toWei(amount.toString()))
   console.log(await bankContract.methods.send(address, amount).send({
@@ -382,16 +364,6 @@ document.getElementById('get-bank-balance').addEventListener('click', function (
 
 }, false);
 
-const transferForm = document.getElementById('transfer')
-
-transferForm.addEventListener('submit', function (event) {
-  const address = transferForm.querySelector('input[name="address"]').value
-  const amount = transferForm.querySelector('input[name="amount"]').value
-  transfer(address, amount)
-  // Don't follow the link
-  event.preventDefault();
-
-}, false);
 
 const sendForm = document.getElementById('send-balance')
 
