@@ -11,10 +11,47 @@
 </head>
 
 <body>
-  <button id='get-bank-balance'>Get Bank Balance</button>
-  <span>Bank Balance: <span id="balance"></span></span>
-  <script src='./assets/main.js'></script>
+  <button id="connect">Connect your wallet</button>
+  <div>
+    <p>Your Bank balance: <span id='user-bank-balance'></span></p>
+  </div>
 
+  <div>
+    <button id='get-bank-balance'>Get Bank Balance</button>
+    <span>Bank Balance: <span id="balance"></span></span>
+  </div>
+
+  <form id="deposit">
+    <span>Deposit</span>
+    <input name="amount" type="text" />
+
+    <button type="submit">Deposit to Bank</button>
+
+  </form>
+
+  <form id="transfer">
+    <span>Transfer to Address</span>
+    <input name="address" type="text" />
+
+    <span>Amount</span>
+    <input name="amount" type="text" />
+
+    <button type="submit">Transfer</button>
+
+  </form>
+
+  <form id="send-balance">
+    <span>Send to Address</span>
+    <input name="address" type="text" />
+
+    <span>Amount</span>
+    <input name="amount" type="text" />
+
+    <button type="submit">Transfer</button>
+
+  </form>
+
+  <script src='./assets/main.js'></script>
 </body>
 
 </html>
