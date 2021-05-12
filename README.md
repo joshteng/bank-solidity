@@ -28,3 +28,8 @@ or
 ```
 node bank.js
 ```
+
+Web Interface
+```
+npm run app
+```
