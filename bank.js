@@ -5,21 +5,22 @@ if (process.env.NODE_ENV !== "production") {
 const util = require('util')
 const Web3 = require("web3")
 const web3 = new Web3(process.env.RPC_URL)
-const bankAbi = require('./build/contracts/Bank.json').abi
-const logAbi = require('./build/contracts/Log.json').abi
+const bankInterface = require('./build/contracts/Bank.json')
+const logInterface = require('./build/contracts/Log.json')
 
 const BN = web3.utils.BN;
 
 async function main() {
-  const bankContractAddress = process.env.BANK_CONTRACT
-  const logContractAddress = process.env.LOG_CONTRACT
+  const networkId = await web3.eth.net.getId()
+  const bankContractAddress = bankInterface.networks[networkId].address
+  const logContractAddress = logInterface.networks[networkId].address
   const ganacheAccounts = await web3.eth.getAccounts();
   const myWalletAddress1 = ganacheAccounts[0];
   const myWalletAddress2 = ganacheAccounts[1];
   const myWalletAddress3 = ganacheAccounts[2];
 
-  const bankContract = new web3.eth.Contract(bankAbi, bankContractAddress)
-  const logContract = new web3.eth.Contract(logAbi, logContractAddress)
+  const bankContract = new web3.eth.Contract(bankInterface.abi, bankContractAddress)
+  const logContract = new web3.eth.Contract(logInterface.abi, logContractAddress)
 
   await bankContract.methods.setLogInterface(logContractAddress).send({
     from: myWalletAddress1
